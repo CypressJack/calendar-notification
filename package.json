@@ -1,0 +1,19 @@
+{
+  "name": "calendar-notification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/archaemedes/calendar-notification.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/archaemedes/calendar-notification/issues"
+  },
+  "homepage": "https://github.com/archaemedes/calendar-notification#readme"
+}
