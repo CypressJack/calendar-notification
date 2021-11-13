@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/archaemedes/calendar-notification/issues"
   },
-  "homepage": "https://github.com/archaemedes/calendar-notification#readme"
+  "homepage": "https://github.com/archaemedes/calendar-notification#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "node-notifier": "^10.0.0"
+  }
 }
