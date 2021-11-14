@@ -1,4 +1,5 @@
 const fs = require("fs");
+const colors = require('colors');
 const readline = require("readline");
 const { google } = require("googleapis");
 const { builtinModules } = require("module");
@@ -9,7 +10,7 @@ const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = "token.json";
+const TOKEN_PATH = "./dependancies/token.json";
 
 var notifier = new WindowsToaster({
   withFallback: false, // Fallback to Growl or Balloons?
@@ -17,8 +18,9 @@ var notifier = new WindowsToaster({
 });
 
 function makeNotifications() {
+  console.clear();
   // Load client secrets from a local file.
-  fs.readFile("credentials.json", (err, content) => {
+  fs.readFile("./dependancies/credentials.json", (err, content) => {
     if (err) return console.log("Error loading client secret file:", err);
     // Authorize a client with credentials, then call the Google Calendar API.
     authorize(JSON.parse(content), listEvents);
@@ -118,20 +120,20 @@ function listEvents(auth) {
           const dateAndSummary = `${dateTime}${event.summary}`;
           if (formattedDate === date) {
             eventToday = 1;
-            console.log(`Event found ${dateAndSummary}`);
             const minutesBefore = 15;
             var meeting = new Date(year, month - 1, day, hours, minutes, 0);
             var notification = new Date();
             notification.setTime(meeting.getTime() - (minutesBefore * 60 * 1000));
             if (notification > today) {
-              console.log('Notification Time', notification.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}), "PST");
+              console.log(`\n---------\n`, `\n${event.summary}`.brightGreen, `${meeting.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})} PST`.brightCyan);
+              console.log('Scheduled Notification Time'.brightBlue, notification.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}).brightGreen, "PST".brightGreen);
               const job = schedule.scheduleJob(notification, function(){
                 console.log('scheduler triggered');
                 notifier.notify(
                   {
                     title: event.summary, // String. Required
                     message: "Happens in 15 minutes", // String. Required if remove is not defined
-                    icon: "./calendar-logo.png", // String. Absolute path to Icon
+                    icon: "./dependancies/calendar-logo.png", // String. Absolute path to Icon
                     sound: true, // Bool | String (as defined by http://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx)
                     id: 88888, // Number. ID to use for closing notification.
                     appID: "Google Calendar", // String. App.ID and app Name. Defaults to no value, causing SnoreToast text to be visible.
@@ -144,7 +146,8 @@ function listEvents(auth) {
                 );
               });
             } else {
-              console.log(`Notification has already happened`);
+              console.log(`\n---------\n`, `\n${event.summary}`.brightGreen, `${meeting.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})} PST`.brightRed);
+              console.log(`Notification has already happened`.yellow);
             }
           }
         });

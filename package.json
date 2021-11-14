@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run": "node calendar.js",
-    "build": "nexe -i calendar.js -r node_modules/ -o calendarapp -t windows --build"
+    "build": "nexe -i calendar.js -r node_modules/  dependencies/**/*/ -o calendarapp -t windows --verbose --build"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/archaemedes/calendar-notification#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "dotenv": "^10.0.0",
     "googleapis": "^39.2.0",
     "node-notifier": "^10.0.0",
