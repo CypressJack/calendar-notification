@@ -2,10 +2,11 @@
   "name": "calendar-notification",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "calendar.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "node app.js"
+    "run": "node calendar.js",
+    "build": "nexe -i calendar.js -r node_modules/ -o calendarapp -t windows --build"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   "homepage": "https://github.com/archaemedes/calendar-notification#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "node-notifier": "^10.0.0"
+    "googleapis": "^39.2.0",
+    "node-notifier": "^10.0.0",
+    "node-schedule": "^2.0.0"
   }
 }
